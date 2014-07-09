@@ -3,9 +3,16 @@ package com.hazelcastspring;
 import com.hazelcast.core.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+
+import java.io.Serializable;
+import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.atomic.*;
+import java.util.concurrent.*;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Created by Mustafa Orkun Acar <mustafaorkunacar@gmail.com> on 07.07.2014.
@@ -19,7 +26,8 @@ public class HazelcastDataTypes
 
     public static void main(String[] args)
     {
-        System.out.println(testBean.getResult());
+        for(int i = 0; i < 5; i++)
+            System.out.println(testBean.getResult());
 
         ExecuteMap();
         ExecuteMultiMap();
@@ -75,12 +83,21 @@ public class HazelcastDataTypes
 
     public static void ExecuteList()
     {
-
+        int k = rand.nextInt(100);
+        List<Integer> list = (List<Integer>) context.getBean("list");
+        list.add(k);
+        System.out.println(list.iterator().next());
     }
 
     public static void ExecuteExecuterService()
     {
-
+        ExecutorService executorService = (ExecutorService) context.getBean("executorService");
+        executorService.execute(new Runnable() {
+            public void run() {
+                System.out.println("ExecuterService Run");
+            }
+        });
+        executorService.shutdown();
     }
 
     public static void ExecuteIdGenerator()

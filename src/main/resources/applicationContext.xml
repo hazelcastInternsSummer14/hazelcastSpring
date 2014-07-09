@@ -41,6 +41,13 @@
         </hz:config>
     </hz:hazelcast>
 
+    <hz:client id="client">
+        <hz:group name="name" password="pwd"/>
+        <hz:network>
+            <hz:member>127.0.0.1:5701</hz:member>
+        </hz:network>
+    </hz:client>
+
     <cache:annotation-driven cache-manager="cacheManager" />
 
     <bean id="cacheManager" class="com.hazelcast.spring.cache.HazelcastCacheManager">
