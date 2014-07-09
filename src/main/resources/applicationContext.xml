@@ -33,7 +33,6 @@
                 <hz:property name="hazelcast.merge.first.run.delay.seconds">5</hz:property>
                 <hz:property name="hazelcast.merge.next.run.delay.seconds">5</hz:property>
             </hz:properties>
-
             <hz:network port="${defaultPort}" port-auto-increment="true">
                 <hz:join>
                     <hz:multicast enabled="true"/>

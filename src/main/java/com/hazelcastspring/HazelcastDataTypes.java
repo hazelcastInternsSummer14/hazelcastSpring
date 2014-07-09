@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.*;
 import java.util.Random;
 
 /**
- * Created by acar on 07.07.2014.
+ * Created by Mustafa Orkun Acar <mustafaorkunacar@gmail.com> on 07.07.2014.
  */
 
 public class HazelcastDataTypes
