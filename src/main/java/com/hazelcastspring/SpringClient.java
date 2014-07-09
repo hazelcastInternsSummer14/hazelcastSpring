@@ -24,12 +24,12 @@ public class SpringClient
         ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
         TestBean testBean = (TestBean) context.getBean("springTestBean");
 
-        System.out.println("#######  BEGIN #######");
+        System.out.println("#######  CLIENT BEGIN #######");
 
         for(int i = 0; i < 5; i++)
             System.out.println(testBean.getResult());
 
-        System.out.println("#######  END #######");
+        System.out.println("#######  CLIENT END #######");
 
         Hazelcast.shutdownAll();
         HazelcastClient.shutdownAll();
