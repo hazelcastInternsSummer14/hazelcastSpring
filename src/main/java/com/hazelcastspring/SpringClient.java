@@ -3,6 +3,8 @@ package com.hazelcastspring;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
@@ -23,13 +25,12 @@ public class SpringClient
 
         Hazelcast.newHazelcastInstance(config);
         ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-        TestBean testBean = (TestBean) context.getBean("springTestBean");
 
         System.out.println("#######  CLIENT BEGIN #######");
-
-        for(int i = 0; i < 5; i++)
-            System.out.println(testBean.getResult());
-
+        HazelcastInstance client =  (HazelcastInstance) context.getBean("client");
+        IMap map = client.getMap("map");
+        map.put("city", "Istanbul");
+        System.out.println("City: " + map.get("city"));
         System.out.println("#######  CLIENT END #######");
 
         Hazelcast.shutdownAll();

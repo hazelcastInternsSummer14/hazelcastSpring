@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.Cacheable;
 public class TestBean
 {
     private String result;
-    @Cacheable("cacheManagerForClient")
-    public String getResult() { System.out.println("Cacheable Run"); return result; }
+    public String getResult() { return result; }
     public void setResult(String Result) { result = Result; }
 }

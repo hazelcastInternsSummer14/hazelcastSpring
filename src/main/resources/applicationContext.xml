@@ -7,7 +7,7 @@
                "http://www.springframework.org/schema/beans
               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
               http://www.hazelcast.com/schema/spring
-              http://www.hazelcast.com/schema/spring/hazelcast-spring-3.3.xsd
+              http://www.hazelcast.com/schema/spring/hazelcast-spring-3.2.xsd
               http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
        ">
 
@@ -45,18 +45,7 @@
         </hz:network>
     </hz:client>
 
-    <cache:annotation-driven cache-manager="cacheManagerForData"/>
-    <cache:annotation-driven cache-manager="cacheManagerForClient"/>
-
-    <bean id="cacheManagerForData" class="com.hazelcast.spring.cache.HazelcastCacheManager">
-        <constructor-arg ref="instance"/>
-    </bean>
-
-    <bean id="cacheManagerForClient" class="com.hazelcast.spring.cache.HazelcastCacheManager">
-        <constructor-arg ref="client"/>
-    </bean>
-
-    <hz:map             id="map"             instance-ref="instance" name="Map"/>
+    <hz:map             id="map"             instance-ref="instance" name="Map" lazy-init="false"/>
     <hz:multiMap        id="multiMap"        instance-ref="instance" name="Multimap"/>
     <hz:queue           id="queue"           instance-ref="instance" name="Queue"/>
     <hz:topic           id="topic"           instance-ref="instance" name="Topic" depends-on="instance, client"/>
@@ -64,15 +53,10 @@
     <hz:list            id="list"            instance-ref="instance" name="List"/>
     <hz:executorService id="executorService" instance-ref="instance" name="ExecutorService"/>
     <hz:idGenerator     id="idGenerator"     instance-ref="instance" name="IdGenerator"/>
-
-    <!-- atomic is problematic
-
-    <hz:atomicLong id="atomicLong" instance-ref="instance" name="atomicLong"/>
+    <hz:atomicLong      id="atomicLong"      instance-ref="instance" name="atomicLong"/>
     <hz:atomicReference id="atomicReference" instance-ref="instance" name="atomicReference"/>
-    <hz:countDownLatch id="countDownLatch" instance-ref="instance" name="countDownLatch"/>
-    <hz:semaphore id="semaphore" instance-ref="instance" name="semaphore"/>
-    <hz:lock id="lock" instance-ref="instance" name="lock"/>
-
-    -->
+    <hz:countDownLatch  id="countDownLatch"  instance-ref="instance" name="countDownLatch"/>
+    <hz:semaphore       id="semaphore"       instance-ref="instance" name="semaphore"/>
+    <hz:lock            id="lock"            instance-ref="instance" name="lock"/>
 
 </beans>
