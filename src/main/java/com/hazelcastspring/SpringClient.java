@@ -9,6 +9,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 /**
  * Created by Mustafa Orkun Acar <mustafaorkunacar@gmail.com> on 09.07.2014.
  */
+
 public class SpringClient
 {
     public static void main(String[] args)
@@ -33,6 +34,5 @@ public class SpringClient
 
         Hazelcast.shutdownAll();
         HazelcastClient.shutdownAll();
-
     }
 }

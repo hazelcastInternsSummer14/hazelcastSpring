@@ -39,9 +39,9 @@
     </hz:hazelcast>
 
     <hz:client id="client">
-        <hz:group name="${group.name}" password="${group.password}"/>
+        <hz:group name="${name}" password="${password}"/>
         <hz:network>
-            <hz:member>127.0.0.1:5701</hz:member>
+            <hz:member>127.0.0.1:5705</hz:member>
         </hz:network>
     </hz:client>
 
@@ -59,7 +59,7 @@
     <hz:map             id="map"             instance-ref="instance" name="Map"/>
     <hz:multiMap        id="multiMap"        instance-ref="instance" name="Multimap"/>
     <hz:queue           id="queue"           instance-ref="instance" name="Queue"/>
-    <hz:topic           id="topic"           instance-ref="instance" name="Topic"/>
+    <hz:topic           id="topic"           instance-ref="instance" name="Topic" depends-on="instance, client"/>
     <hz:set             id="set"             instance-ref="instance" name="Set"/>
     <hz:list            id="list"            instance-ref="instance" name="List"/>
     <hz:executorService id="executorService" instance-ref="instance" name="ExecutorService"/>
@@ -76,4 +76,3 @@
     -->
 
 </beans>
-

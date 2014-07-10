@@ -5,13 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.*;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import com.hazelcast.core.IdGenerator;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 /**
  * Created by Mustafa Orkun Acar <mustafaorkunacar@gmail.com> on 07.07.2014.
@@ -70,10 +66,14 @@ public class HazelcastDataTypes
     public static void ExecuteTopic()
     {
         System.out.println("### Topic Execution Started ###");
-        /*
         ITopic topic = (ITopic) context.getBean("topic");
-        topic.addMessageListener()
-        */
+        topic.addMessageListener(new MessageListener() {
+            @Override
+            public void onMessage(Message message) {
+                System.out.println("Topic Received Message: " + message);
+            }
+        });
+        topic.publish("object");
     }
 
     public static void ExecuteSet()
